@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="HomeDelivery"
+  id="myeclipse.1497683302141"
+  context-root="/HomeDelivery"
+  j2ee-spec="6.0"
+  archive="HomeDelivery.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
