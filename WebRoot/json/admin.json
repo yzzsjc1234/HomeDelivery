@@ -1,0 +1,5 @@
+[
+		{ "id":"1001", "pId":"100", "name":"Staff management", "page":"page_admin_userindex.action"},
+		{ "id":"1002", "pId":"100", "name":"Access management", "page":"page_admin_function.action"},
+		{ "id":"1003", "pId":"100", "name":"Role management", "page":"page_admin_role.action"}
+]
