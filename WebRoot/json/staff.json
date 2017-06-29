@@ -1,0 +1,7 @@
+{                                                      
+	"total":100,	
+	"rows":[ 
+		{"id":"001","name":"Rose","telephone":"13912345678","haspda":"1","deltag":"0","standard":"10-20kg","station":"Guangzhou branch"},
+		{"id":"002","name":"Jack","telephone":"13912345678","haspda":"1","deltag":"0","standard":"10-20kg","station":"Guangzhou branch"}
+	]
+}

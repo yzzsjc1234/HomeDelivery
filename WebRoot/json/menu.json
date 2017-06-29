@@ -1,0 +1,14 @@
+[
+		{ "id":"11", "pId":"0", "name":"Basic data"},
+		{ "id":"112", "pId":"11", "name":"Courier setting",  "page":"page_base_staff.action"},
+		{ "id":"113", "pId":"11", "name":"Region setting","page":"page_base_region.action"},
+		{ "id":"114", "pId":"11", "name":"Subarea management", "page":"page_base_subarea.action"},
+		{ "id":"115", "pId":"11", "name":"Decide zone","page":"page_base_decidedzone.action"},
+		{ "id":"12", "pId":"0", "name":"Service"},
+		{ "id":"121", "pId":"12", "name":"Add order" ,"page":"page_qupai_noticebill_add.action"},
+		{ "id":"122", "pId":"12", "name":"Quickly create order" ,"page":"page_qupai_quickworkorder.action"},
+		{ "id":"124", "pId":"12", "name":"Order batch import" ,"page":"page_qupai_workorderimport.action"},
+		{ "id":"13", "pId":"0", "name":"Dispatch"},
+		{ "id":"131", "pId":"13", "name":"Auto dispatch","page":""},
+		{ "id":"132", "pId":"13", "name":"Artificial dispatch","page":"page_qupai_diaodu.action"}
+]
