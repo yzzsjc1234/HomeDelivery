@@ -5,10 +5,16 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring"/>
+	<!-- inject message.property -->
+	<constant name="struts.custom.i18n.resources" value="message"></constant>
 	<package name="basicstruts2" extends="struts-default">
 		<!-- for privilege control -->
 		<action name="page_*_*">
 			<result name="success" type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="home">/index.jsp</result>
+			<result name="login">/login.jsp</result>
 		</action>
 	</package>
 </struts>
