@@ -46,5 +46,31 @@ public class UserAction extends BaseAction<User>{
 			return "login";
 		}
 	}
-	
+	/**
+	 * user log out
+	 */
+	public String logout(){
+		//invalidate session
+		ServletActionContext.getRequest().getSession().invalidate();
+		return "login";
+	}
+	/**
+	 * modify password
+	 * @throws IOException 
+	 */
+	public String editPassword() throws IOException{
+		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("loginUser");
+		String password = model.getPassword();//new password
+		password = MD5Utils.md5(password);
+		String flag = "1";
+		try{
+			userService.editPassword(password,user.getId());
+		}catch (Exception e) {
+			//failed
+			flag = "0";
+		}
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(flag);
+		return NONE;
+	}
 }

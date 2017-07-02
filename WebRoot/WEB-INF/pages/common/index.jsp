@@ -84,9 +84,35 @@
 			$('#editPwdWindow').window('close');
 		});
 		
+		// event for "confirm"
 		$("#btnEp").click(function(){
-			alert("Modify password");
+			//validate the form data
+			var v = $("#editPasswordForm").form("validate");//to validate all input data
+			if(v){// requirement is ok
+				//the two input springs are the same?
+				var v1 = $("#txtNewPass").val();
+				var v2 = $("#txtRePass").val();
+				if(v1 == v2){
+					//Same. Then send ajax request and modify password
+					var url = "${pageContext.request.contextPath}/userAction_editPassword.action";
+					$.post(url,{"password":v1},function(data){
+						if(data == '1'){
+							//return flag is "1"
+							$.messager.alert("Tips","Modified password successfully！","info");
+						}else{
+							//return flag is "0"
+							$.messager.alert("Tips","Failed to modify password！","warning");
+						}
+						// close the editPwdWindow after action
+						$("#editPwdWindow").window("close");
+					});
+				}else{
+					//not the same and open waring window
+					$.messager.alert("Tips","The two input passwords are diffrent！","warning");
+				}
+			}
 		});
+		
 	});
 
 	function onClick(event, treeId, treeNode, clickFlag) {
@@ -135,7 +161,7 @@
 		$.messager
 		.confirm('Messager','Do you want to log out from the system?',function(isConfirm) {
 			if (isConfirm) {
-				location.href = '${pageContext.request.contextPath }/login.jsp';
+				location.href = '${pageContext.request.contextPath }/userAction_logout.action';
 			}
 		});
 	}
@@ -219,16 +245,20 @@
         background: #fafafa">
         <div class="easyui-layout" fit="true">
             <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
-                <table cellpadding=3>
-                    <tr>
-                        <td>New password：</td>
-                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
-                    </tr>
-                    <tr>
-                        <td>Re-enter password：</td>
-                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
-                    </tr>
-                </table>
+                <form id="editPasswordForm">
+	                <table cellpadding=3>
+	                    <tr>
+	                        <td>New password：</td>
+	                        <td><input id="txtNewPass" type="Password" class="txt01 easyui-validatebox" 
+	                        	required="true" data-options="validType:'length[4,8]'"/></td>
+	                    </tr>
+	                    <tr>
+	                        <td>Re-enter password：</td>
+	                        <td><input id="txtRePass" type="Password" class="txt01 easyui-validatebox" 
+	                        	required="true" data-options="validType:'length[4,8]'"/></td>
+	                    </tr>
+	                </table>
+                </form>
             </div>
             <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
                 <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >Confirm</a> 

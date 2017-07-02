@@ -38,4 +38,8 @@
             <column name="remark" />
         </property>
     </class>
+    <!-- To state the hql by name for edit password function -->
+    <query name="editPassword">
+    	UPDATE User SET password = ? WHERE id = ?
+    </query>
 </hibernate-mapping>
