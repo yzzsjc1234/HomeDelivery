@@ -27,6 +27,9 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-en.js"
 	type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath }/js/outOfBounds.js"
+	type="text/javascript"></script>	
 <script type="text/javascript">
 	// init ztree 
 	$(function() {
