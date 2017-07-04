@@ -3,6 +3,8 @@ package com.homedelivery.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
+import com.homedelivery.utils.PageBean;
+
 /**
  * commonly function
  */
@@ -14,4 +16,5 @@ public interface IBaseDao<T> {
 	public List<T> findAll();
 	//for commonly used modify method
 	public void executeUpdate(String queryName,Object ...objects);
+	public void pageQuery(PageBean pageBean);
 }

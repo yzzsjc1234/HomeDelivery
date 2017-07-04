@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.homedelivery.dao.IStaffDao;
 import com.homedelivery.domain.Staff;
 import com.homedelivery.service.IStaffService;
+import com.homedelivery.utils.PageBean;
 
 
 @Service
@@ -17,5 +18,8 @@ public class StaffServiceImpl implements IStaffService{
 
 	public void save(Staff model) {
 		staffDao.save(model);
+	}
+	public void pageQuery(PageBean pageBean) {
+		staffDao.pageQuery(pageBean);
 	}
 }

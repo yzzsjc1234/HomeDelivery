@@ -10,9 +10,12 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.homedelivery.dao.base.IBaseDao;
+import com.homedelivery.utils.PageBean;
 
 /**
  * commonly function impl
@@ -78,6 +81,29 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 			query.setParameter(i++, arg);
 		}
 		query.executeUpdate();// execute update
+	}
+	
+	/**
+	 * commonly query by pages method
+	 */
+	public void pageQuery(PageBean pageBean) {
+		int currentPage = pageBean.getCurrentPage();
+		int pageSize = pageBean.getPageSize();
+		DetachedCriteria detachedCriteria = pageBean.getDetachedCriteria();
+		//Total data rows----select count(*) from bc_staff
+		//To change Hibernate framework's sql format
+		detachedCriteria.setProjection(Projections.rowCount());//select count(*) from bc_staff
+		List<Long> list = this.getHibernateTemplate().findByCriteria(detachedCriteria);
+		Long total = list.get(0);
+		pageBean.setTotal(total.intValue());//set total value
+		detachedCriteria.setProjection(null);//edit sql format to default like : select * from ....
+		//To reset the reflect relation between table and class
+		detachedCriteria.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
+		//List for raws data which need to display in current page
+		int firstResult = (currentPage - 1) * pageSize;
+		int maxResults = pageSize;
+		List rows = this.getHibernateTemplate().findByCriteria(detachedCriteria, firstResult, maxResults);
+		pageBean.setRows(rows);
 	}
 
 }
