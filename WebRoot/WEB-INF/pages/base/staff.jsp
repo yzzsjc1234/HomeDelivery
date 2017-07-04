@@ -161,20 +161,30 @@
 		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
 				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >Save</a>
+				<script type="text/javascript">
+					$(function(){
+						//event
+						$("#save").click(function(){
+							//validation is ok?
+							var v = $("#addStaffForm").form("validate");
+							if(v){
+								//submit if it is ok
+								$("#addStaffForm").submit();
+							}
+						});
+					});
+				</script>
 			</div>
 		</div>
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addStaffForm" action="${pageContext.request.contextPath }/staffAction_add.action"
+					 method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">Courier information</td>
 					</tr>
 					<!-- TODO Adding courier table -->
-					<tr>
-						<td>Courier id</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
 					<tr>
 						<td>Name</td>
 						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
