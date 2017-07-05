@@ -77,4 +77,23 @@ public class StaffAction extends BaseAction<Staff>{
 		staffService.deleteBatch(ids);
 		return "list";
 	}
+	
+	/**
+	 * edit courier
+	 */
+	public String edit(){
+		//get staff object from database firstly
+		//if we use update directly will override other parameter to null like decidezone
+		Staff staff = staffService.findById(model.getId());
+		
+		//override
+		staff.setName(model.getName());
+		staff.setTelephone(model.getTelephone());
+		staff.setStation(model.getStation());
+		staff.setHaspda(model.getHaspda());
+		staff.setStandard(model.getStandard());
+		
+		staffService.update(staff);
+		return "list";
+	}
 }

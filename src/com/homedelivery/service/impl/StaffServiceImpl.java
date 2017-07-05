@@ -32,4 +32,13 @@ public class StaffServiceImpl implements IStaffService{
 			staffDao.executeUpdate("staff.delete", id);
 		}
 	}
+	
+	public Staff findById(String id) {
+		return staffDao.findById(id);
+	}
+	
+	public void update(Staff staff) {
+		staffDao.update(staff);
+	}
+	
 }

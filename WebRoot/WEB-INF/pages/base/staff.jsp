@@ -150,9 +150,20 @@
 			onDblClickRow : doDblClickRow
 		});
 		
-		// Add&Eidt courier
+		// Add courier
 		$('#addStaffWindow').window({
-	        title: 'Add/Eidt courier',
+	        title: 'Add courier',
+	        width: 400,
+	        modal: true, //background cannnot click
+	        shadow: true,
+	        closed: true,//closed, need event to open
+	        height: 400,
+	        resizable:false
+	    });
+	    
+	    // Eidt courier
+		$('#editStaffWindow').window({
+	        title: 'Eidt courier',
 	        width: 400,
 	        modal: true,
 	        shadow: true,
@@ -163,8 +174,9 @@
 		
 	});
 
-	function doDblClickRow(rowIndex, rowData){
-		alert("Double click table...");
+	function doDblClickRow(rowIndex, rowData){//{id:xxx,name:xx,}
+		$('#editStaffWindow').window("open");//open edit window
+		$("#editStaffForm").form("load",rowData);
 	}
 </script>	
 </head>
@@ -195,6 +207,65 @@
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
 			<form id="addStaffForm" action="${pageContext.request.contextPath }/staffAction_add.action"
 					 method="post">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">Courier information</td>
+					</tr>
+					<!-- TODO Adding courier table -->
+					<tr>
+						<td>Name</td>
+						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>Telephone</td>
+						<td><input type="text" name="telephone" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>Station</td>
+						<td><input type="text" name="station" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						<input type="checkbox" name="haspda" value="1" />
+						Has PDA?</td>
+					</tr>
+					<tr>
+						<td>Standard</td>
+						<td>
+							<input type="text" name="standard" class="easyui-validatebox" required="true"/>  
+						</td>
+					</tr>
+					</table>
+			</form>
+		</div>
+	</div>
+	
+	
+	<!-- edit window -->
+	<div class="easyui-window" title="Add/Eidt courier" id="editStaffWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
+			<div class="datagrid-toolbar">
+				<a id="edit" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >Save</a>
+				<script type="text/javascript">
+					$(function(){
+						//event
+						$("#edit").click(function(){
+							//validation is ok?
+							var v = $("#editStaffForm").form("validate");
+							if(v){
+								//submit if it is ok
+								$("#editStaffForm").submit();
+							}
+						});
+					});
+				</script>
+			</div>
+		</div>
+		
+		<div region="center" style="overflow:auto;padding:5px;" border="false">
+			<form id="editStaffForm" action="${pageContext.request.contextPath }/staffAction_edit.action"
+					 method="post">
+					 <input type="hidden" name="id">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">Courier information</td>
