@@ -37,7 +37,22 @@
 	}
 	
 	function doDelete(){
-		alert("Delete...");
+		//get selected raws
+		var rows = $("#grid").datagrid("getSelections");
+		if(rows.length == 0){
+			// give tips if no one be selected
+			$.messager.alert("Message","Please select records need to be deleted！","warning");
+		}else{
+			var array = new Array();
+			//get all ids from selections
+			for(var i=0;i<rows.length;i++){
+				var id = rows[i].id;
+				array.push(id);
+			}
+			var ids = array.join(",");
+			//send request with ids
+			window.location.href = '${pageContext.request.contextPath}/staffAction_delete.action?ids='+ids;
+		}
 	}
 	
 	function doRestore(){
@@ -93,7 +108,7 @@
 		}
 	}, {
 		field : 'deltag',
-		title : 'Delete tag?',
+		title : 'Deleted?',
 		width : 120,
 		align : 'center',
 		formatter : function(data,row, index){

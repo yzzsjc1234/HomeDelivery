@@ -63,4 +63,18 @@ public class StaffAction extends BaseAction<Staff>{
 		ServletActionContext.getResponse().getWriter().print(json);
 		return NONE;
 	}
+	
+	//receive ids parameter 
+	private String ids;
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+		
+	/**
+		* batch delete function (logical delete)
+	*/
+	public String delete(){
+		staffService.deleteBatch(ids);
+		return "list";
+	}
 }

@@ -22,4 +22,14 @@ public class StaffServiceImpl implements IStaffService{
 	public void pageQuery(PageBean pageBean) {
 		staffDao.pageQuery(pageBean);
 	}
+	
+	/**
+	 * batch delete
+	 */
+	public void deleteBatch(String ids) {
+		String[] staffIds = ids.split(",");
+		for (String id : staffIds) {
+			staffDao.executeUpdate("staff.delete", id);
+		}
+	}
 }
