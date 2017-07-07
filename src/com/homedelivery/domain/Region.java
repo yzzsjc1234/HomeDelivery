@@ -18,6 +18,10 @@ public class Region implements java.io.Serializable {
 	private String postcode;
 	private String shortcode;
 	private String citycode;
+	
+	public String getName(){
+		return province + " " + city + " " + district;
+	}
 	private Set subareas = new HashSet(0);
 
 	// Constructors

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -77,6 +78,29 @@ public class RegionAction extends BaseAction<Region>{
 		return NONE;
 	}
 	
+	//fuzzy query criteria
+		private String q;
+	/**
+	 * query all region data and return json
+	 * @throws IOException 
+	 */
+	public String listajax() throws IOException{
+		List<Region> list = null;//regionService.findAll();
+		if(StringUtils.isNotBlank(q)){
+			list = regionService.findByQ(q);
+		}else{
+			list = regionService.findAll();
+		}
+		String[] excludes = new String[]{"subareas"};
+		this.writeList2Json(list, excludes);
+		return NONE;
+	}
 
-	
+	public String getQ() {
+		return q;
+	}
+
+	public void setQ(String q) {
+		this.q = q;
+	}
 }

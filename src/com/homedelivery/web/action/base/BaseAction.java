@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.homedelivery.service.IRegionService;
 import com.homedelivery.service.IStaffService;
+import com.homedelivery.service.ISubareaService;
 import com.homedelivery.utils.PageBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -29,6 +30,9 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected IRegionService regionService;
 	@Autowired
 	protected IStaffService staffService;
+	@Autowired
+	protected ISubareaService subareaService;
+	
 	protected PageBean pageBean = new PageBean();
 	DetachedCriteria detachedCriteria = null;
 
@@ -78,4 +82,13 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 		}
 	}
 	
+	public  void writeList2Json(List list, String[] excludes) throws IOException {
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(excludes);
+		JSONArray jsonObject = JSONArray.fromObject(list, jsonConfig);
+		String json = jsonObject.toString();
+		ServletActionContext.getResponse().setContentType(
+				"text/json;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(json);
+	}
 }
