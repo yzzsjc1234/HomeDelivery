@@ -125,7 +125,7 @@
 		align : 'center'
 	}, {
 		field : 'station',
-		title : 'Department',
+		title : 'Station',
 		width : 200,
 		align : 'center'
 	} ] ];

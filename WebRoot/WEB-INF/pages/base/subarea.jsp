@@ -44,7 +44,7 @@
 	}
 	
 	function doExport(){
-		alert("Export");
+		window.location.href = "${pageContext.request.contextPath}/subareaAction_exportXls.action";
 	}
 	
 	function doImport(){
@@ -160,7 +160,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/subarea.json",
+			url : "${pageContext.request.contextPath}/subareaAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -187,9 +187,7 @@
 	        height: 400,
 	        resizable:false
 	    });
-		$("#btn").click(function(){
-			alert("Searching...");
-		});
+		
 		
 	});
 
@@ -227,10 +225,6 @@
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">Subarea information</td>
-					</tr>
-					<tr>
-						<td>Id</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>Region</td>
@@ -272,7 +266,7 @@
 	<!-- Query subarea -->
 	<div class="easyui-window" title="Query subarea" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="searchForm">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">Query terms</td>
@@ -294,7 +288,38 @@
 						<td><input type="text" name="addresskey"/></td>
 					</tr>
 					<tr>
-						<td colspan="2"><a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Query</a> </td>
+						<td colspan="2"><a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Query</a> 
+							<script>
+								$(function(){
+									// Tool for input form data tranfers(serializes) to json data
+									$.fn.serializeJson=function(){  
+							            var serializeObj={};  
+							            var array=this.serializeArray();
+							            $(array).each(function(){  
+							                if(serializeObj[this.name]){  
+							                    if($.isArray(serializeObj[this.name])){  
+							                        serializeObj[this.name].push(this.value);  
+							                    }else{  
+							                        serializeObj[this.name]=[serializeObj[this.name],this.value];  
+							                    }  
+							                }else{  
+							                    serializeObj[this.name]=this.value;   
+							                }  
+							            });  
+							            return serializeObj;  
+							        }; 
+							        
+							        //event
+									$("#btn").click(function(){
+										var p = $("#searchForm").serializeJson();//{id:xx,name:yy,age:zz}
+										//"load" for doing ajax request again and submit "p"
+										$("#grid").datagrid("load",p);
+										//close window
+										$("#searchWindow").window("close");
+									});
+								});
+							</script>
+						</td>
 					</tr>
 				</table>
 			</form>

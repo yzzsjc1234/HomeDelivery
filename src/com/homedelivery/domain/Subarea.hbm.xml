@@ -14,7 +14,7 @@
         <many-to-one name="decidedzone" class="com.homedelivery.domain.Decidedzone" fetch="select">
             <column name="decidedzone_id" length="32" />
         </many-to-one>
-        <many-to-one name="region" class="com.homedelivery.domain.Region" fetch="select">
+        <many-to-one lazy="false" name="region" class="com.homedelivery.domain.Region" fetch="select">
             <column name="region_id" length="32" />
         </many-to-one>
         <property name="addresskey" type="java.lang.String">
