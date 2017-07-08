@@ -19,7 +19,7 @@ public class Staff implements java.io.Serializable {
 	private String station;
 	private String standard;
 	private Set decidedzones = new HashSet(0);
-
+	
 	// Constructors
 
 	/** default constructor */

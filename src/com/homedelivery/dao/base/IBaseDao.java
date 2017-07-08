@@ -3,6 +3,8 @@ package com.homedelivery.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.homedelivery.utils.PageBean;
 
 /**
@@ -18,4 +20,5 @@ public interface IBaseDao<T> {
 	//for commonly used modify method
 	public void executeUpdate(String queryName,Object ...objects);
 	public void pageQuery(PageBean pageBean);
+	public List<T> findByCriteria(DetachedCriteria detachedCriteria);
 }

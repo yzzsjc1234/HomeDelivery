@@ -271,11 +271,21 @@
 		<div style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
 				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >Save</a>
+				<script type="text/javascript">
+					$(function(){
+						$("#save").click(function(){
+							var v = $("#addDecidedzoneForm").form("validate");
+							if(v){
+								$("#addDecidedzoneForm").submit();
+							}
+						});
+					});
+				</script>
 			</div>
 		</div>
 		
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addDecidedzoneForm" action="${pageContext.request.contextPath }/decidedzoneAction_add.action">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">Zone information</td>
@@ -291,18 +301,18 @@
 					<tr>
 						<td>owner</td>
 						<td>
-							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+							<input class="easyui-combobox" name="staff.id"  
+    							data-options="valueField:'id',textField:'name',url:'${pageContext.request.contextPath }/staffAction_listajax.action'" />  
 						</td>
 					</tr>
 					<tr height="300">
 						<td valign="top">Accociated subarea</td>
 						<td>
-							<table id="subareaGrid"  class="easyui-datagrid" border="false" style="width:300px;height:300px" data-options="url:'json/decidedzone_subarea.json',fitColumns:true,singleSelect:false">
+							<table id="subareaGrid"  class="easyui-datagrid" border="false" style="width:300px;height:300px" data-options="url:'${pageContext.request.contextPath }/subareaAction_listajax.action',fitColumns:true,singleSelect:false">
 								<thead>  
 							        <tr>  
-							            <th data-options="field:'id',width:30,checkbox:true">Id</th>  
-							            <th data-options="field:'addresskey',width:150">Key word</th>  
+							            <th data-options="field:'subareaid',width:30,checkbox:true">Id</th>  
+							            <th data-options="field:'addresskey',width:150">Addresskey</th>  
 							            <th data-options="field:'position',width:200,align:'right'">Location</th>  
 							        </tr>  
 							    </thead> 

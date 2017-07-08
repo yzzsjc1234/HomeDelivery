@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,5 +31,13 @@ public class SubareaServiceImpl implements ISubareaService{
 	
 	public  List<Subarea> findAll(){
 		return subareaDao.findAll();
+	}
+	/**
+	 * query subarea which doesn't associates with decidedzone
+	 */
+	public List<Subarea> findListNotAssociation() {
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Subarea.class);
+		detachedCriteria.add(Restrictions.isNull("decidedzone"));
+		return subareaDao.findByCriteria(detachedCriteria );
 	}
 }

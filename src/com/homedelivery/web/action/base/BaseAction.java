@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.homedelivery.service.IDecidedzoneService;
 import com.homedelivery.service.IRegionService;
 import com.homedelivery.service.IStaffService;
 import com.homedelivery.service.ISubareaService;
@@ -32,6 +33,8 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected IStaffService staffService;
 	@Autowired
 	protected ISubareaService subareaService;
+	@Autowired
+	protected IDecidedzoneService decidedzoneService;
 	
 	protected PageBean pageBean = new PageBean();
 	DetachedCriteria detachedCriteria = null;

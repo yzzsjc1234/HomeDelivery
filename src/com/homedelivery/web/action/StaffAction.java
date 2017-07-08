@@ -1,6 +1,7 @@
 package com.homedelivery.web.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -75,5 +76,15 @@ public class StaffAction extends BaseAction<Staff>{
 		
 		staffService.update(staff);
 		return "list";
+	}
+	/**
+	 * Query couriers which is not deleted and return Json
+	 * @throws IOException 
+	 */
+	public String listajax() throws IOException{
+		List<Staff> list = staffService.findListNotDelete();
+		String[] excludes = new String[]{"decidedzones"};
+		this.writeList2Json(list, excludes);
+		return NONE;
 	}
 }

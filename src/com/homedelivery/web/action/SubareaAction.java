@@ -112,4 +112,11 @@ public class SubareaAction extends BaseAction<Subarea> {
 		workbook.write(out);
 		return NONE;
 	}
+	
+	public String listajax() throws IOException{
+		List<Subarea> list = subareaService.findListNotAssociation();
+		String[] excludes = new String[]{"decidedzone","region"};
+		this.writeList2Json(list, excludes );
+		return NONE;
+	}
 }

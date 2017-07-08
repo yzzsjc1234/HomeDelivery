@@ -44,5 +44,9 @@
 		<action name="subareaAction_*" class="subareaAction" method="{1}">
 			<result name="list">/WEB-INF/pages/base/subarea.jsp</result>
 		</action>
+		<!-- Decidedzone management -->
+		<action name="decidedzoneAction_*" class="decidedzoneAction" method="{1}">
+			<result name="list">/WEB-INF/pages/base/decidedzone.jsp</result>
+		</action>
 	</package>
 </struts>
