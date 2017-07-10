@@ -1,6 +1,7 @@
 package com.homedelivery.service;
 
 import com.homedelivery.domain.Decidedzone;
+import com.homedelivery.utils.PageBean;
 
 
 
@@ -8,5 +9,7 @@ import com.homedelivery.domain.Decidedzone;
 public interface IDecidedzoneService {
 
 	public void save(Decidedzone model, String[] subareaid);
+
+	public void pageQuery(PageBean pageBean);
 
 }

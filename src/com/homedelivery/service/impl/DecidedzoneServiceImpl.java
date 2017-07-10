@@ -9,6 +9,7 @@ import com.homedelivery.dao.ISubareaDao;
 import com.homedelivery.domain.Decidedzone;
 import com.homedelivery.domain.Subarea;
 import com.homedelivery.service.IDecidedzoneService;
+import com.homedelivery.utils.PageBean;
 
 
 @Service
@@ -30,6 +31,10 @@ public class DecidedzoneServiceImpl implements IDecidedzoneService{
 			//UPDATE Subarea SET decidedzone = ? WHERE id = ?
 			subarea.setDecidedzone(model);
 		}
+	}
+	
+	public void pageQuery(PageBean pageBean) {
+		decidedzoneDao.pageQuery(pageBean);
 	}
 
 }
