@@ -1,9 +1,12 @@
 package com.homedelivery.web.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import cn.homedelivery.crm.domain.Customer;
 
 import com.homedelivery.domain.Decidedzone;
 import com.homedelivery.web.action.base.BaseAction;
@@ -43,6 +46,48 @@ public class DecidedzoneAction extends BaseAction<Decidedzone> {
 		this.writePageBean2Json(pageBean, new String[] { "decidedzones",
 				"subareas", "currentPage", "detachedCriteria", "pageSize" });
 		return NONE;
+	}
+	/**
+	 * get customers without association decidedzone
+	 * @return
+	 * @throws IOException
+	 */
+	public String findnoassociationCustomers() throws IOException{
+		List<Customer> list = customerService.findnoassociationCustomers();
+		String[] excludes = new String[]{"station","address"};
+		this.writeList2Json(list, excludes);
+		return NONE;
+	}
+	
+	/**
+	 * get customers with this association decidedzone
+	 * @return
+	 * @throws IOException
+	 */
+	public String findhasassociationCustomers() throws IOException{
+		List<Customer> list = customerService.findhasassociationCustomers(model.getId());
+		String[] excludes = new String[]{"station","address"};
+		this.writeList2Json(list, excludes);
+		return NONE;
+	}
+	
+	private Integer[] customerIds;
+	
+	/**
+	 * Assign customers to the decidedzone
+	 * @return
+	 */
+	public String assigncustomerstodecidedzone(){
+		customerService.assignCustomersToDecidedZone(customerIds, model.getId());
+		return "list";
+	}
+
+	public Integer[] getCustomerIds() {
+		return customerIds;
+	}
+
+	public void setCustomerIds(Integer[] customerIds) {
+		this.customerIds = customerIds;
 	}
 
 }

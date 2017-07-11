@@ -41,7 +41,7 @@ public class StaffAction extends BaseAction<Staff>{
 		
 		staffService.pageQuery(pageBean);
 		//PageBean object tranfers to json to get raws data
-		this.writePageBean2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize"});
+		this.writePageBean2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize","decidedzones"});
 		return NONE;
 	}
 	

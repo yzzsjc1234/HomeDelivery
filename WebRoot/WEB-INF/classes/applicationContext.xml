@@ -55,4 +55,12 @@
 	<context:annotation-config/>
 	<!-- transaction annotation -->
 	<tx:annotation-driven />
+	
+	<!-- remote service proxy bean config -->
+	<bean id="customerService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<!-- service interface -->
+		<property name="serviceInterface" value="com.homedelivery.crm.CustomerService"/>
+		<!-- service access path -->
+		<property name="serviceUrl" value="http://localhost:80/crm/remoting/customer"/>
+	</bean>
 </beans>

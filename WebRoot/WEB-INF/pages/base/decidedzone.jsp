@@ -44,7 +44,39 @@
 	}
 	
 	function doAssociations(){
-		$('#customerWindow').window('open');
+		//if one decidedzone was selected?
+		var rows = $("#grid").datagrid("getSelections");
+		if(rows.length == 1){
+			id = rows[0].id;
+			//selected one decidedzone
+			$('#customerWindow').window('open');
+			$("#noassociationSelect").empty();//clear box
+			$("#associationSelect").empty();//clear box
+			
+			//send AJAX request and get customers without association decidedzone
+			var url1 = "${pageContext.request.contextPath}/decidedzoneAction_findnoassociationCustomers.action";
+			$.post(url1,{},function(data){
+				// analyse Json data and fill to box
+				for(var i=0;i<data.length;i++){
+					var id = data[i].id;
+					var name = data[i].name;
+					$("#noassociationSelect").append("<option value='"+id+"'>"+name+"</option>");
+				}
+			},'json');
+			
+			//send AJAX request and get customers with this association decidedzone
+			var url2 = "${pageContext.request.contextPath}/decidedzoneAction_findhasassociationCustomers.action";
+			$.post(url2,{"id":rows[0].id},function(data){
+				//analyse Json data and fill to box
+				for(var i=0;i<data.length;i++){
+					var id = data[i].id;
+					var name = data[i].name;
+					$("#associationSelect").append("<option value='"+id+"'>"+name+"</option>");
+				}
+			},'json');
+		}else{
+			$.messager.alert("Message","Please select one decidedzone!","warning");
+		}
 	}
 	
 	//tools bar
@@ -348,9 +380,9 @@
 	</div>
 	
 	<!-- Associated customer -->
-	<div class="easyui-window" title="Associated customer" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 400px;height: 300px;">
+	<div class="easyui-window" title="Associated customer" modal="true" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 400px;height: 300px;">
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form id="customerForm" action="${pageContext.request.contextPath }/decidedzone_assigncustomerstodecidedzone.action" method="post">
+			<form id="customerForm" action="${pageContext.request.contextPath }/decidedzoneAction_assigncustomerstodecidedzone.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="3">Associated customer</td>
@@ -363,13 +395,33 @@
 						<td>
 							<input type="button" value="》》" id="toRight"><br/>
 							<input type="button" value="《《" id="toLeft">
+							<script type="text/javascript">
+								$(function(){
+									//events for "toRight" & "toLeft"
+									$("#toRight").click(function(){
+										$("#associationSelect").append($("#noassociationSelect option:selected"));
+									});
+									$("#toLeft").click(function(){
+										$("#noassociationSelect").append($("#associationSelect option:selected"));
+									});
+									
+									//event for association between customers and decidedzone
+									$("#associationBtn").click(function(){
+										//select right options before submit
+										$("#associationSelect option").attr("selected","selected");
+										//get decidedzone id
+										$("input[name=id]").val(id);
+										$("#customerForm").submit();
+									});
+								});
+							</script>
 						</td>
 						<td>
 							<select id="associationSelect" name="customerIds" multiple="multiple" size="10"></select>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3"><a id="associationBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Associated customer</a> </td>
+						<td colspan="3"><a id="associationBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Associate with customers</a> </td>
 					</tr>
 				</table>
 			</form>

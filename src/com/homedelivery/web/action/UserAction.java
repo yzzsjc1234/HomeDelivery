@@ -15,8 +15,7 @@ import com.homedelivery.web.action.base.BaseAction;
 @Controller//("abc") annotion in web layer by name 
 @Scope("prototype")
 public class UserAction extends BaseAction<User>{
-	@Resource
-	private IUserService userService;
+	
 	
 	//
 	private String checkcode;
