@@ -7,7 +7,7 @@ Summary:
 1. Used Git as version control software.
 2. User login contains MD5 encoding module and verification code.<br>
 ![image](https://github.com/yzzsjc1234/HomeDelivery/blob/master/Intro/login.png)
-3. Used JQuery EasyUI to do page design like Ztree, Tabs, According, Datagrid and used Ajax/Json to display data on pages.
+3. Used JQuery EasyUI to do page design like Ztree, Tabs, Datagrid and used Ajax/Json to display data on pages.
 ![image](https://github.com/yzzsjc1234/HomeDelivery/blob/master/Intro/easyui.png)
 4. Used Apache POI to write/read excel files in order to implements upload/import and download/export functions between client and server.
 5. Used session to do privilege control.
