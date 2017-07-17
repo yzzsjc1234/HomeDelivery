@@ -1,5 +1,5 @@
 # HomeDelivery
-This is a JaveEE Home Delivery Business &amp; Operation System based on Struts2/Spring/Hibernate and html/css/js.
+This is a JavaEE Home Delivery Business &amp; Operation System based on Struts2/Spring/Hibernate and html/css/js.
 
 HomeDelivery system contains mainstream functions such like user login, courier/region/subarea/decidedzone setting, system management, etc.
 
