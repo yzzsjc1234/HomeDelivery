@@ -10,7 +10,7 @@ Summary:
 3. Used JQuery EasyUI to do page design like Ztree, Tabs, Datagrid and used Ajax/Json to display data on pages.
 ![image](https://github.com/yzzsjc1234/HomeDelivery/blob/master/Intro/JQuery.gif)
 4.Courier/region/subarea/decidedzone and system setting with different functions.
-![image](https://github.com/yzzsjc1234/HomeDelivery/blob/master/Intro/Couriers setting.gif)
+![image](https://github.com/yzzsjc1234/HomeDelivery/blob/master/Intro/Couriers_setting.gif)
 5. Used Apache POI to write/read excel files in order to implements upload/import and download/export functions between client and server.
 ![image](https://github.com/yzzsjc1234/HomeDelivery/blob/master/Intro/POI.gif)
 6. Used session to do privilege control.
